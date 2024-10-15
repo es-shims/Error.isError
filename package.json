@@ -1,0 +1,31 @@
+{
+	"name": "error.iserror",
+	"version": "0.0.0",
+	"description": "An ESnext spec-compliant `Error.isError` shim/polyfill/replacement that works as far down as ES3",
+	"main": "index.js",
+	"exports": {
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/es-shims/Error.isError.git"
+	},
+	"keywords": [
+		"javascript",
+		"ecmascript",
+		"polyfill",
+		"shim",
+		"Error",
+		"isError",
+		"es-shim API"
+	],
+	"author": "Jordan Harband <ljharb@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/es-shims/Error.isError/issues"
+	},
+	"homepage": "https://github.com/es-shims/Error.isError#readme"
+}
