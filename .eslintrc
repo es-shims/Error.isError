@@ -1,0 +1,35 @@
+{
+	"root": true,
+
+	"extends": "@ljharb",
+
+	"globals": {
+		"SuppressedError": false,
+	},
+
+	"rules": {
+		"new-cap": ["error", {
+			"capIsNewExceptions": [
+				"Type",
+			],
+		}],
+	},
+
+	"overrides": [
+		{
+			"files": "aos/*.js",
+			"rules": {
+				// "max-statements": "off",
+			},
+		},
+		{
+			"files": "test/tests.js",
+			"env": {
+				"browser": true,
+			},
+			"rules": {
+				// "max-lines-per-function": "off",
+			},
+		},
+	],
+}
