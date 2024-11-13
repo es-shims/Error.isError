@@ -14,11 +14,25 @@ var $toString = callBound('Object.prototype.toString');
 var stackDesc = gOPD($Error.prototype, 'stack');
 var stackGetter = stackDesc && stackDesc.get && callBind(stackDesc.get);
 
-var domExceptionClonable = !!($structuredClone && $structuredClone(new DOMException()) instanceof $Error);
+var domExceptionClonable = !!(
+	$structuredClone
+	&& typeof DOMException === 'function'
+	&& $structuredClone(new DOMException()) instanceof $Error
+);
 
 module.exports = function isError(arg) {
 	if (!arg || (typeof arg !== 'object' && typeof arg !== 'function')) {
 		return false; // step 1
+	}
+
+	var str = $toString(arg);
+
+	if (str === '[object DOMException]') {
+		return true;
+	}
+
+	if (isNativeError) { // node 10+
+		return isNativeError(arg);
 	}
 
 	if ($structuredClone) {
@@ -33,22 +47,10 @@ module.exports = function isError(arg) {
 		}
 	}
 
-	if (isNativeError && isNativeError(arg)) { // node 10+
-		return true;
-	}
-
-	var str = $toString(arg);
-
-	if (
-		str === '[object DOMException]' // browsers
-		|| ((!hasToStringTag || !(Symbol.toStringTag in arg))
-			&& (
-				str === '[object DOMError]' // browsers, deprecated
-				|| str === '[object Exception]' // sentry
-			)
-		)
-	) {
-		return true;
+	if (!hasToStringTag || !(Symbol.toStringTag in arg)) {
+		return str === '[object Error]' // errors
+			|| str === '[object DOMError]' // browsers, deprecated
+			|| str === '[object Exception]'; // sentry
 	}
 
 	// Firefox
