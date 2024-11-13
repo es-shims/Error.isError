@@ -14,29 +14,41 @@ var $toString = callBound('Object.prototype.toString');
 var stackDesc = gOPD($Error.prototype, 'stack');
 var stackGetter = stackDesc && stackDesc.get && callBind(stackDesc.get);
 
+var domExceptionClonable = !!($structuredClone && $structuredClone(new DOMException()) instanceof $Error);
+
 module.exports = function isError(arg) {
 	if (!arg || (typeof arg !== 'object' && typeof arg !== 'function')) {
 		return false; // step 1
 	}
 
-	if (isNativeError) { // node 10+
-		return isNativeError(arg);
-	}
-
 	if ($structuredClone) {
 		try {
-			return $structuredClone(arg) instanceof $Error;
+			if ($structuredClone(arg) instanceof $Error) {
+				return true;
+			} else if (domExceptionClonable) {
+				return false;
+			}
 		} catch (e) {
 			return false;
 		}
 	}
 
-	if (!hasToStringTag || !(Symbol.toStringTag in arg)) {
-		var str = $toString(arg);
-		return str === '[object Error]' // errors
-			|| str === '[object DOMException]' // browsers
-			|| str === '[object DOMError]' // browsers, deprecated
-			|| str === '[object Exception]'; // sentry
+	if (isNativeError && isNativeError(arg)) { // node 10+
+		return true;
+	}
+
+	var str = $toString(arg);
+
+	if (
+		str === '[object DOMException]' // browsers
+		|| ((!hasToStringTag || !(Symbol.toStringTag in arg))
+			&& (
+				str === '[object DOMError]' // browsers, deprecated
+				|| str === '[object Exception]' // sentry
+			)
+		)
+	) {
+		return true;
 	}
 
 	// Firefox
