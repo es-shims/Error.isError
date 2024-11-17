@@ -25,9 +25,7 @@ module.exports = function isError(arg) {
 		return false; // step 1
 	}
 
-	var str = $toString(arg);
-
-	if (str === '[object DOMException]') {
+	if (typeof DOMException === 'function' && arg instanceof DOMException) {
 		return true;
 	}
 
@@ -48,7 +46,9 @@ module.exports = function isError(arg) {
 	}
 
 	if (!hasToStringTag || !(Symbol.toStringTag in arg)) {
+		var str = $toString(arg);
 		return str === '[object Error]' // errors
+			|| str === '[object DOMException]' // browsers
 			|| str === '[object DOMError]' // browsers, deprecated
 			|| str === '[object Exception]'; // sentry
 	}
