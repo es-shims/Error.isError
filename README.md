@@ -9,7 +9,7 @@
 
 An ESnext spec-compliant `Error.isError` shim/polyfill/replacement that works as far down as ES3.
 
-This package implements the [es-shim API](https://github.com/es-shims/api) interface. It works in an ES3-supported environment and complies with the proposed [spec](https://tc39.github.io/proposal-array-grouping/).
+This package implements the [es-shim API](https://github.com/es-shims/api) interface. It works in an ES3-supported environment and complies with the proposed [spec](https://tc39.es/proposal-is-error/).
 
 ## Getting started
 
