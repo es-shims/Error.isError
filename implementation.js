@@ -3,8 +3,9 @@
 var $Error = require('es-errors');
 var hasToStringTag = require('has-tostringtag')();
 var callBind = require('call-bind');
-var callBound = require('call-bind/callBound');
+var callBound = require('call-bound');
 var gOPD = require('gopd');
+
 var isNativeError = require('./helpers/isNativeError');
 
 var $structuredClone = typeof structuredClone === 'function' ? structuredClone : null;
