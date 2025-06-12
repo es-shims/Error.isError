@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.1](https://github.com/es-shims/Error.isError/compare/v1.0.0...v1.0.1) - 2025-06-12
+
+### Commits
+
+- [Dev Deps] update `@es-shims/api`, `@types/node`, `call-bind`, `es-value-fixtures`, `for-each`, `object-inspect` [`d67852d`](https://github.com/es-shims/Error.isError/commit/d67852df8fc3cf1b1a3e73d90b6d449d7e06dac5)
+- [Refactor] use `call-bound` directly [`e2de244`](https://github.com/es-shims/Error.isError/commit/e2de244414be311e2fb96edf70769b125780e0d4)
+- [Fix] move `call-bind` to dependencies [`5ea0b0a`](https://github.com/es-shims/Error.isError/commit/5ea0b0a50721d37a7374e1428cf496b1fd2357a6)
+- [Deps] update `gopd` [`8c4e920`](https://github.com/es-shims/Error.isError/commit/8c4e9201e773d03172f1baece8be6168aefe7474)
+- Update README.md [`8ec3ee6`](https://github.com/es-shims/Error.isError/commit/8ec3ee6ee9b0175af48feea1d8171dd7a5d0784c)
+- [Dev Deps] add missing peer dep [`059b44a`](https://github.com/es-shims/Error.isError/commit/059b44a2f0a334a1b7abc3e297a4af91643d1e1f)
+
 ## v1.0.0 - 2024-10-17
 
 ### Commits
