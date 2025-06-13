@@ -60,7 +60,8 @@ module.exports = function (isError, t) {
 			new URIError(),
 			new EvalError(),
 			typeof AggregateError === 'function' ? new AggregateError([]) : [],
-			typeof SuppressedError === 'function' ? new SuppressedError() : []
+			typeof SuppressedError === 'function' ? new SuppressedError() : [],
+			typeof DOMException === 'function' ? new DOMException() : []
 		), function (error) {
 			st.equal(isError(error), true, inspect(error) + ' is an Error object');
 		});
