@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.2](https://github.com/es-shims/Error.isError/compare/v1.0.1...v1.0.2) - 2025-07-24
+
+### Commits
+
+- [Fix] properly recognize `DOMException`s in node &lt; v24.3 [`bf8291e`](https://github.com/es-shims/Error.isError/commit/bf8291e946b4c961fb0d4750c4ef27401eaa9f19)
+- [Dev Deps] update `@ljharb/eslint-config`, `@types/node` [`2870003`](https://github.com/es-shims/Error.isError/commit/2870003b288dbb741192012d2b2e5e99d0bbfaec)
+
 ## [v1.0.1](https://github.com/es-shims/Error.isError/compare/v1.0.0...v1.0.1) - 2025-06-12
 
 ### Commits
