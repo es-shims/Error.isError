@@ -65,6 +65,14 @@ module.exports = function (isError, t) {
 			st.equal(isError(error), true, inspect(error) + ' is an Error object');
 		});
 
+		st.test('DOMExceptions', { skip: typeof DOMException === 'undefined' }, function (s2t) {
+			var e = new DOMException('message', 'name');
+
+			s2t.equal(isError(e), true, inspect(e) + ' is an Error object');
+
+			s2t.end();
+		});
+
 		st.test('from another realm', function (s2t) {
 			s2t.test('in node', { skip: runInNewContext }, function (s3t) {
 				forEach([].concat(
@@ -90,6 +98,7 @@ module.exports = function (isError, t) {
 					document.querySelectorAll('div:foo');
 					s3t.fail('Expected a DOMException');
 				} catch (e) {
+					s3t.ok(e instanceof DOMException, 'DOMException thrown');
 					s3t.equal(isError(e), true, 'DOMException ' + inspect(e) + ' is an Error object');
 				}
 

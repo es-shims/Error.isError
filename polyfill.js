@@ -3,5 +3,11 @@
 var implementation = require('./implementation');
 
 module.exports = function getPolyfill() {
-	return Error.isError || implementation;
+	if (
+		!Error.isError
+		|| (typeof DOMException === 'function' && !Error.isError(new DOMException()))
+	) {
+		return implementation;
+	}
+	return Error.isError;
 };

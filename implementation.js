@@ -6,6 +6,7 @@ var callBind = require('call-bind');
 var callBound = require('call-bound');
 var gOPD = require('gopd');
 
+var isDOMException = require('./helpers/isDOMException');
 var isNativeError = require('./helpers/isNativeError');
 
 var $structuredClone = typeof structuredClone === 'function' ? structuredClone : null;
@@ -21,6 +22,9 @@ module.exports = function isError(arg) {
 	}
 
 	if (isNativeError) { // node 10+
+		if (isDOMException && isDOMException(arg)) { // node < 24.3
+			return true;
+		}
 		return isNativeError(arg);
 	}
 

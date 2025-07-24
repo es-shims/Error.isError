@@ -55,6 +55,10 @@ assert.equal(isError({ __proto__: Error.prototype, constructor: Error, [Symbol.t
 const err = Object.assign(new Error(), { [Symbol.toStringTag]: 'Non-Error' });
 Object.setPrototypeOf(err, null);
 assert.equal(isError(err), true);
+
+
+// note: node < v24.3 has an `Error.isError` that does not work correctly with DOMException objects
+assert.equal(isError(new DOMException()), true);
 ```
 
 ```js
