@@ -16,9 +16,19 @@ var $toString = callBound('Object.prototype.toString');
 var stackDesc = gOPD($Error.prototype, 'stack');
 var stackGetter = stackDesc && stackDesc.get && callBind(stackDesc.get);
 
+var domExceptionClonable = !!(
+	$structuredClone
+	&& typeof DOMException === 'function'
+	&& $structuredClone(new DOMException()) instanceof $Error
+);
+
 module.exports = function isError(arg) {
 	if (!arg || (typeof arg !== 'object' && typeof arg !== 'function')) {
 		return false; // step 1
+	}
+
+	if (typeof DOMException === 'function' && arg instanceof DOMException) {
+		return true;
 	}
 
 	if (isNativeError) { // node 10+
@@ -30,7 +40,11 @@ module.exports = function isError(arg) {
 
 	if ($structuredClone) {
 		try {
-			return $structuredClone(arg) instanceof $Error;
+			if ($structuredClone(arg) instanceof $Error) {
+				return true;
+			} else if (domExceptionClonable) {
+				return false;
+			}
 		} catch (e) {
 			return false;
 		}
